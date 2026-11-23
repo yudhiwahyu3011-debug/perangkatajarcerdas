@@ -1,0 +1,1904 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendidik Bermakna — Perangkat Ajar Kurikulum Merdeka & Berbasis Cinta</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Marked.js untuk parsing Markdown tambahan jika diperlukan -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                            800: '#9f1239',
+                            900: '#881337',
+                        },
+                        warm: {
+                            50: '#fdfcfb',
+                            100: '#faf6f2',
+                            200: '#f3ece4',
+                            800: '#292524',
+                            900: '#1c1917',
+                        },
+                        teal: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #fdfcfb;
+            color: #1c1917;
+        }
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Styling khusus area dokumen resmi yang dihasilkan AI */
+        .doc-paper {
+            background: #ffffff;
+            color: #1e293b;
+            line-height: 1.65;
+            font-size: 14.5px;
+        }
+        .doc-paper h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #881337;
+            text-align: center;
+            border-bottom: 3px double #be123c;
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+        .doc-paper h2 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #9f1239;
+            background-color: #fff1f2;
+            padding: 0.45rem 0.85rem;
+            border-left: 4px solid #e11d48;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .doc-paper h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #0f766e;
+            margin-top: 1.1rem;
+            margin-bottom: 0.4rem;
+        }
+        .doc-paper p {
+            margin-bottom: 0.65rem;
+        }
+        .doc-paper ul, .doc-paper ol {
+            margin-left: 1.4rem;
+            margin-bottom: 0.85rem;
+        }
+        .doc-paper ul {
+            list-style-type: disc;
+        }
+        .doc-paper ol {
+            list-style-type: decimal;
+        }
+        .doc-paper li {
+            margin-bottom: 0.35rem;
+        }
+        .doc-paper table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 13.5px;
+        }
+        .doc-paper th, .doc-paper td {
+            border: 1px solid #cbd5e1;
+            padding: 0.6rem 0.75rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        .doc-paper th {
+            background-color: #f8fafc;
+            font-weight: 700;
+            color: #334155;
+        }
+        .doc-paper .cinta-box {
+            background-color: #fff1f2;
+            border: 1px solid #fecdd3;
+            border-left: 4px solid #e11d48;
+            border-radius: 0.5rem;
+            padding: 0.85rem 1rem;
+            margin: 0.85rem 0;
+        }
+        .doc-paper .deep-box {
+            background-color: #f0fdfa;
+            border: 1px solid #ccfbf1;
+            border-left: 4px solid #0d9488;
+            border-radius: 0.5rem;
+            padding: 0.85rem 1rem;
+            margin: 0.85rem 0;
+        }
+
+        /* Mode Edit Langsung */
+        .doc-paper[contenteditable="true"] {
+            outline: 2px dashed #e11d48;
+            outline-offset: 6px;
+            background-color: #fffdfd;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f5f5f4;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d6d3d1;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a29e;
+        }
+
+        /* Print Styles: Sembunyikan UI navigasi, cetak dokumen saja */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printable-area, #printable-area * {
+                visibility: visible;
+            }
+            #printable-area {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                padding: 0 !important;
+                margin: 0 !important;
+                box-shadow: none !important;
+                border: none !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .doc-paper h2, .doc-paper th, .doc-paper .cinta-box, .doc-paper .deep-box {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-100 selection:text-brand-900">
+
+    <!-- Toast Notification Container (Menggantikan alert()) -->
+    <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
+
+    <!-- Custom Confirmation Modal (Menggantikan confirm()) -->
+    <div id="confirm-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-stone-900/50 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-stone-100 transform transition-all">
+            <div class="flex items-center gap-3 text-brand-600 mb-3">
+                <div class="w-10 h-10 rounded-full bg-brand-50 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <h3 id="confirm-title" class="text-lg font-bold text-stone-900">Konfirmasi Tindakan</h3>
+            </div>
+            <p id="confirm-message" class="text-sm text-stone-600 mb-6 leading-relaxed">Apakah Anda yakin ingin melanjutkan?</p>
+            <div class="flex justify-end gap-3">
+                <button id="confirm-cancel-btn" class="px-4 py-2.5 rounded-xl text-sm font-medium text-stone-600 hover:bg-stone-100 transition">Batal</button>
+                <button id="confirm-ok-btn" class="px-4 py-2.5 rounded-xl text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 shadow-sm transition">Ya, Lanjutkan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         HALAMAN 1: AUTENTIKASI (LOGIN & REGISTRASI EMAIL)
+    ====================================================================== -->
+    <section id="auth-screen" class="min-h-screen flex flex-col lg:flex-row bg-warm-50">
+        <!-- Panel Kiri: Branding & Filosofi Pendidikan -->
+        <div class="lg:w-1/2 bg-gradient-to-br from-brand-700 via-brand-600 to-rose-500 text-white p-8 lg:p-14 flex flex-col justify-between relative overflow-hidden">
+            <div class="absolute -top-24 -right-24 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-amber-300/15 rounded-full blur-3xl"></div>
+
+            <div class="relative z-10 flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-2xl shadow-inner border border-white/30">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+                <div>
+                    <span class="font-display font-extrabold text-2xl tracking-tight">Pendidik Bermakna</span>
+                    <p class="text-xs text-brand-100 font-medium">Asisten Pedagogik Kurikulum Merdeka & KBC</p>
+                </div>
+            </div>
+
+            <div class="relative z-10 my-10 lg:my-0 space-y-6">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur-sm border border-white/25 text-xs font-semibold">
+                    <i class="fa-solid fa-sparkles text-amber-300"></i>
+                    <span>Mendukung Semua Jenjang: PAUD • SD/MI • SMP/MTs • SMA/MA/SMK</span>
+                </div>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
+                    Merancang Pembelajaran Bermakna, Mendalam, dan Penuh Cinta.
+                </h1>
+                <p class="text-brand-100 text-base sm:text-lg max-w-xl leading-relaxed">
+                    Susun <strong>Modul Ajar, Bahan Ajar, LKPD, dan Asesmen</strong> yang memadukan fleksibilitas <em>Kurikulum Merdeka</em>, nilai-nilai <em>Panca Cinta (Kurikulum Berbasis Cinta)</em>, serta pendekatan <em>Deep Learning (Mindful, Meaningful, Joyful)</em> dalam hitungan detik.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+                    <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4">
+                        <div class="w-8 h-8 rounded-lg bg-amber-400/20 text-amber-200 flex items-center justify-center mb-2">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                        <h3 class="font-bold text-sm">Panca Cinta KBC</h3>
+                        <p class="text-xs text-brand-100 mt-1">Cinta Tuhan, Ilmu, Lingkungan, Sesama & Tanah Air.</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4">
+                        <div class="w-8 h-8 rounded-lg bg-teal-400/20 text-teal-200 flex items-center justify-center mb-2">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h3 class="font-bold text-sm">Deep Learning</h3>
+                        <p class="text-xs text-brand-100 mt-1">Berkesadaran, Bermakna, dan Menggembirakan.</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4">
+                        <div class="w-8 h-8 rounded-lg bg-sky-400/20 text-sky-200 flex items-center justify-center mb-2">
+                            <i class="fa-solid fa-file-word"></i>
+                        </div>
+                        <h3 class="font-bold text-sm">Siap Cetak & Word</h3>
+                        <p class="text-xs text-brand-100 mt-1">Edit langsung & ekspor rapi ke PDF atau .DOC.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative z-10 text-xs text-brand-100 flex flex-wrap justify-between items-center gap-2 border-t border-white/15 pt-4">
+                <span>&copy; 2026 Pendidik Bermakna • Sahabat Pendidik Indonesia</span>
+                <span>Kurikulum Merdeka &bull; Kurikulum Berbasis Cinta</span>
+            </div>
+        </div>
+
+        <!-- Panel Kanan: Form Login & Registrasi Email -->
+        <div class="lg:w-1/2 flex items-center justify-center p-6 sm:p-12">
+            <div class="w-full max-w-md bg-white rounded-3xl shadow-xl shadow-stone-200/60 border border-stone-100 p-8">
+                <!-- Tab Switcher Login / Daftar -->
+                <div class="flex bg-stone-100 p-1 rounded-2xl mb-6">
+                    <button id="tab-login" type="button" onclick="switchAuthTab('login')" class="flex-1 py-2.5 text-sm font-bold rounded-xl bg-white text-brand-600 shadow-sm transition">
+                        Masuk Akun
+                    </button>
+                    <button id="tab-register" type="button" onclick="switchAuthTab('register')" class="flex-1 py-2.5 text-sm font-semibold rounded-xl text-stone-600 hover:text-stone-900 transition">
+                        Daftar Baru
+                    </button>
+                </div>
+
+                <div class="mb-6">
+                    <h2 id="auth-heading" class="text-2xl font-extrabold text-stone-900">Selamat Datang Kembali, Bapak/Ibu Guru!</h2>
+                    <p id="auth-subheading" class="text-sm text-stone-500 mt-1">Silakan masuk menggunakan alamat email terdaftar Anda.</p>
+                </div>
+
+                <!-- Form Login Email -->
+                <form id="login-form" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1.5">Alamat Email</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-stone-400">
+                                <i class="fa-solid fa-envelope"></i>
+                            </span>
+                            <input type="email" id="login-email" required placeholder="nama.guru@sekolah.sch.id"
+                                class="w-full pl-10 pr-4 py-3 rounded-xl border border-stone-200 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 outline-none text-sm transition">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1.5">Kata Sandi</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-stone-400">
+                                <i class="fa-solid fa-lock"></i>
+                            </span>
+                            <input type="password" id="login-password" required minlength="6" placeholder="Minimal 6 karakter"
+                                class="w-full pl-10 pr-10 py-3 rounded-xl border border-stone-200 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 outline-none text-sm transition">
+                            <button type="button" onclick="togglePassword('login-password', this)" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-stone-400 hover:text-stone-600">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="btn-login-submit" class="w-full py-3.5 px-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-lg shadow-brand-600/25 transition flex items-center justify-center gap-2">
+                        <span>Masuk ke Ruang Kerja Guru</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </form>
+
+                <!-- Form Registrasi Email -->
+                <form id="register-form" class="space-y-4 hidden">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1.5">Nama Lengkap & Gelar</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-stone-400">
+                                <i class="fa-solid fa-user-tie"></i>
+                            </span>
+                            <input type="text" id="reg-name" required placeholder="Contoh: Siti Aminah, S.Pd., M.Pd."
+                                class="w-full pl-10 pr-4 py-3 rounded-xl border border-stone-200 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 outline-none text-sm transition">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1.5">Jenjang Mengajar</label>
+                            <select id="reg-level" class="w-full px-3.5 py-3 rounded-xl border border-stone-200 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 outline-none text-sm bg-white">
+                                <option value="PAUD / TK">PAUD / TK</option>
+                                <option value="SD / MI" selected>SD / MI</option>
+                                <option value="SMP / MTs">SMP / MTs</option>
+                                <option value="SMA / MA">SMA / MA</option>
+                                <option value="SMK / MAK">SMK / MAK</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1.5">Satuan Pendidikan</label>
+                            <input type="text" id="reg-school" required placeholder="Nama Sekolah/Madrasah"
+                                class="w-full px-3.5 py-3 rounded-xl border border-stone-200 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 outline-none text-sm transition">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1.5">Alamat Email</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-stone-400">
+                                <i class="fa-solid fa-envelope"></i>
+                            </span>
+                            <input type="email" id="reg-email" required placeholder="guru@belajar.id atau email aktif"
+                                class="w-full pl-10 pr-4 py-3 rounded-xl border border-stone-200 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 outline-none text-sm transition">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-stone-600 mb-1.5">Buat Kata Sandi</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-stone-400">
+                                <i class="fa-solid fa-lock"></i>
+                            </span>
+                            <input type="password" id="reg-password" required minlength="6" placeholder="Minimal 6 karakter"
+                                class="w-full pl-10 pr-10 py-3 rounded-xl border border-stone-200 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 outline-none text-sm transition">
+                            <button type="button" onclick="togglePassword('reg-password', this)" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-stone-400 hover:text-stone-600">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="btn-reg-submit" class="w-full py-3.5 px-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-lg shadow-brand-600/25 transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <span>Daftar & Mulai Berkarya</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         HALAMAN 2: APLIKASI UTAMA (DASHBOARD, GENERATOR, & RIWAYAT)
+    ====================================================================== -->
+    <div id="app-screen" class="hidden min-h-screen flex flex-col lg:flex-row bg-warm-50">
+
+        <!-- Mobile Top Navbar -->
+        <header class="lg:hidden bg-white border-b border-stone-200 px-4 py-3 flex items-center justify-between sticky top-0 z-30 no-print">
+            <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-xl bg-brand-600 text-white flex items-center justify-center shadow-sm">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+                <span class="font-display font-extrabold text-lg text-stone-900">Pendidik Bermakna</span>
+            </div>
+            <button onclick="toggleMobileSidebar()" class="p-2 rounded-xl text-stone-600 hover:bg-stone-100">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </header>
+
+        <!-- Sidebar Backdrop Mobile -->
+        <div id="sidebar-backdrop" onclick="toggleMobileSidebar()" class="fixed inset-0 bg-stone-900/40 z-30 hidden lg:hidden no-print"></div>
+
+        <!-- Sidebar Navigasi -->
+        <aside id="sidebar" class="fixed lg:sticky top-0 left-0 z-40 h-screen w-72 bg-white border-r border-stone-200 flex flex-col justify-between transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out no-print">
+            <div class="p-5 overflow-y-auto">
+                <!-- Logo -->
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-600 to-rose-500 text-white flex items-center justify-center text-lg shadow-md shadow-brand-600/20">
+                            <i class="fa-solid fa-heart-pulse"></i>
+                        </div>
+                        <div>
+                            <h1 class="font-display font-extrabold text-lg text-stone-900 leading-none">Pendidik Bermakna</h1>
+                            <span class="text-[11px] font-semibold text-brand-600">Merdeka &bull; Cinta &bull; Mendalam</span>
+                        </div>
+                    </div>
+                    <button onclick="toggleMobileSidebar()" class="lg:hidden text-stone-400 hover:text-stone-700">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+
+                <!-- Kartu Profil Guru -->
+                <div class="bg-gradient-to-br from-brand-50 to-warm-100 border border-brand-100 rounded-2xl p-3.5 mb-6">
+                    <div class="flex items-center gap-3">
+                        <div id="user-avatar" class="w-10 h-10 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center text-sm shrink-0 shadow-sm">
+                            GR
+                        </div>
+                        <div class="min-w-0">
+                            <p id="user-display-name" class="text-sm font-bold text-stone-900 truncate">Nama Guru</p>
+                            <p id="user-display-email" class="text-xs text-stone-500 truncate">email@sekolah.sch.id</p>
+                        </div>
+                    </div>
+                    <div class="mt-2.5 pt-2.5 border-t border-brand-200/60 flex items-center justify-between text-[11px]">
+                        <span id="user-display-level" class="font-semibold text-brand-700 bg-white px-2 py-0.5 rounded-md border border-brand-100">SD / MI</span>
+                        <span id="user-display-school" class="text-stone-600 truncate max-w-[130px]">Sekolah</span>
+                    </div>
+                </div>
+
+                <!-- Menu Navigasi -->
+                <nav class="space-y-1.5">
+                    <p class="px-3 text-[11px] font-bold uppercase tracking-wider text-stone-400 mb-2">Menu Utama</p>
+                    <button onclick="navigateTo('dashboard')" data-nav="dashboard" class="nav-item w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold bg-brand-600 text-white shadow-sm transition">
+                        <i class="fa-solid fa-house-chimney w-5 text-center"></i>
+                        <span>Dashboard Beranda</span>
+                    </button>
+
+                    <p class="px-3 text-[11px] font-bold uppercase tracking-wider text-stone-400 mt-5 mb-2">Buat Perangkat Ajar</p>
+                    <button onclick="openGenerator('Modul Ajar')" data-nav="gen-modul" class="nav-item w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-stone-600 hover:bg-stone-100 transition">
+                        <i class="fa-solid fa-book-open-reader w-5 text-center text-brand-500"></i>
+                        <span>Modul Ajar</span>
+                    </button>
+                    <button onclick="openGenerator('Bahan Ajar')" data-nav="gen-bahan" class="nav-item w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-stone-600 hover:bg-stone-100 transition">
+                        <i class="fa-solid fa-layer-group w-5 text-center text-amber-500"></i>
+                        <span>Bahan Ajar Kontekstual</span>
+                    </button>
+                    <button onclick="openGenerator('LKPD')" data-nav="gen-lkpd" class="nav-item w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-stone-600 hover:bg-stone-100 transition">
+                        <i class="fa-solid fa-clipboard-list w-5 text-center text-teal-600"></i>
+                        <span>LKPD (Lembar Kerja)</span>
+                    </button>
+                    <button onclick="openGenerator('Penilaian & Asesmen')" data-nav="gen-asesmen" class="nav-item w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-stone-600 hover:bg-stone-100 transition">
+                        <i class="fa-solid fa-award w-5 text-center text-indigo-500"></i>
+                        <span>Penilaian & Asesmen</span>
+                    </button>
+
+                    <p class="px-3 text-[11px] font-bold uppercase tracking-wider text-stone-400 mt-5 mb-2">Arsip Saya</p>
+                    <button onclick="navigateTo('history')" data-nav="history" class="nav-item w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium text-stone-600 hover:bg-stone-100 transition">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-folder-open w-5 text-center text-stone-500"></i>
+                            <span>Riwayat Dokumen</span>
+                        </div>
+                        <span id="sidebar-doc-count" class="text-xs font-bold bg-stone-200 text-stone-700 px-2 py-0.5 rounded-full">0</span>
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Footer Sidebar: Tombol Logout -->
+            <div class="p-4 border-t border-stone-200">
+                <button onclick="handleLogout()" class="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-rose-600 bg-rose-50 hover:bg-rose-100 transition">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Keluar Akun</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Konten Utama -->
+        <main class="flex-1 min-w-0 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full">
+
+            <!-- ===============================================================
+                 VIEW 1: DASHBOARD UTAMA
+            ================================================================ -->
+            <div id="view-dashboard" class="space-y-8">
+                <!-- Welcome Banner -->
+                <div class="bg-gradient-to-r from-brand-700 via-brand-600 to-rose-500 rounded-3xl p-6 sm:p-8 text-white shadow-lg shadow-brand-600/15 relative overflow-hidden">
+                    <div class="absolute right-0 top-0 h-full w-1/3 bg-white/5 skew-x-12 transform translate-x-12"></div>
+                    <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                        <div class="space-y-2 max-w-2xl">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 text-xs font-semibold">
+                                <i class="fa-solid fa-heart text-amber-300"></i>
+                                <span>Kurikulum Merdeka &bull; Panca Cinta &bull; Deep Learning</span>
+                            </span>
+                            <h2 id="dash-greeting" class="text-2xl sm:text-3xl font-extrabold">Assalamu'alaikum & Salam Bahagia, Pendidik Hebat!</h2>
+                            <p class="text-brand-100 text-sm sm:text-base leading-relaxed">
+                                Hadirkan pengalaman belajar yang berkesadaran (<em>mindful</em>), bermakna (<em>meaningful</em>), dan menggembirakan (<em>joyful</em>) dengan sentuhan kasih sayang di setiap jenjang pendidikan.
+                            </p>
+                        </div>
+                        <button onclick="openGenerator('Modul Ajar')" class="shrink-0 bg-white text-brand-700 hover:bg-brand-50 font-bold text-sm px-5 py-3.5 rounded-2xl shadow-md transition flex items-center gap-2 self-start md:self-center">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span>Mulai Buat Perangkat</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Statistik Perangkat Ajar -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-white rounded-2xl p-5 border border-stone-200/80 shadow-sm flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-book-open-reader"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-stone-500">Modul Ajar</p>
+                            <p id="stat-modul" class="text-2xl font-extrabold text-stone-900">0</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl p-5 border border-stone-200/80 shadow-sm flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-stone-500">Bahan Ajar</p>
+                            <p id="stat-bahan" class="text-2xl font-extrabold text-stone-900">0</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl p-5 border border-stone-200/80 shadow-sm flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-clipboard-list"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-stone-500">LKPD Siswa</p>
+                            <p id="stat-lkpd" class="text-2xl font-extrabold text-stone-900">0</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl p-5 border border-stone-200/80 shadow-sm flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-stone-500">Asesmen & Soal</p>
+                            <p id="stat-asesmen" class="text-2xl font-extrabold text-stone-900">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4 Kartu Akses Cepat Generator -->
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h3 class="text-lg font-extrabold text-stone-900">Studio Perangkat Ajar AI</h3>
+                            <p class="text-xs text-stone-500">Pilih jenis perangkat ajar yang ingin Anda susun secara otomatis dan mendalam</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                        <!-- Card 1: Modul Ajar -->
+                        <div onclick="openGenerator('Modul Ajar')" class="group cursor-pointer bg-white rounded-2xl p-5 border border-stone-200 hover:border-brand-400 hover:shadow-lg hover:shadow-brand-500/10 transition flex flex-col justify-between">
+                            <div>
+                                <div class="w-11 h-11 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center text-lg mb-4 group-hover:scale-110 transition">
+                                    <i class="fa-solid fa-book-open-reader"></i>
+                                </div>
+                                <h4 class="font-bold text-stone-900 text-base group-hover:text-brand-600 transition">Modul Ajar Lengkap</h4>
+                                <p class="text-xs text-stone-500 mt-1.5 leading-relaxed">
+                                    Identitas, Profil Pelajar Pancasila, Integrasi Panca Cinta, Tujuan ABCD, Langkah Deep Learning (Memahami-Mengaplikasi-Merefleksi), & Asesmen.
+                                </p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-brand-600">
+                                <span>Buat Modul Ajar</span>
+                                <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Bahan Ajar -->
+                        <div onclick="openGenerator('Bahan Ajar')" class="group cursor-pointer bg-white rounded-2xl p-5 border border-stone-200 hover:border-amber-400 hover:shadow-lg hover:shadow-amber-500/10 transition flex flex-col justify-between">
+                            <div>
+                                <div class="w-11 h-11 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-lg mb-4 group-hover:scale-110 transition">
+                                    <i class="fa-solid fa-layer-group"></i>
+                                </div>
+                                <h4 class="font-bold text-stone-900 text-base group-hover:text-amber-600 transition">Bahan Ajar Bermakna</h4>
+                                <p class="text-xs text-stone-500 mt-1.5 leading-relaxed">
+                                    Peta konsep, uraian materi kontekstual, hikmah & nilai Panca Cinta dalam materi, contoh soal bertingkat, rangkuman, dan glosarium.
+                                </p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-amber-600">
+                                <span>Buat Bahan Ajar</span>
+                                <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: LKPD -->
+                        <div onclick="openGenerator('LKPD')" class="group cursor-pointer bg-white rounded-2xl p-5 border border-stone-200 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/10 transition flex flex-col justify-between">
+                            <div>
+                                <div class="w-11 h-11 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center text-lg mb-4 group-hover:scale-110 transition">
+                                    <i class="fa-solid fa-clipboard-list"></i>
+                                </div>
+                                <h4 class="font-bold text-stone-900 text-base group-hover:text-teal-600 transition">LKPD Interaktif</h4>
+                                <p class="text-xs text-stone-500 mt-1.5 leading-relaxed">
+                                    Stimulus masalah nyata, aktivitas eksplorasi & kolaborasi kelompok, kotak refleksi perasaan/nilai cinta siswa, dan rubrik penilaian diri.
+                                </p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-teal-600">
+                                <span>Buat LKPD Siswa</span>
+                                <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Penilaian & Asesmen -->
+                        <div onclick="openGenerator('Penilaian & Asesmen')" class="group cursor-pointer bg-white rounded-2xl p-5 border border-stone-200 hover:border-indigo-400 hover:shadow-lg hover:shadow-indigo-500/10 transition flex flex-col justify-between">
+                            <div>
+                                <div class="w-11 h-11 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-lg mb-4 group-hover:scale-110 transition">
+                                    <i class="fa-solid fa-award"></i>
+                                </div>
+                                <h4 class="font-bold text-stone-900 text-base group-hover:text-indigo-600 transition">Penilaian & Asesmen</h4>
+                                <p class="text-xs text-stone-500 mt-1.5 leading-relaxed">
+                                    Kisi-kisi soal, asesmen diagnostik, formatif, sumatif (PG HOTS & Uraian), kunci jawaban, KKTP, serta rubrik karakter berbasis cinta.
+                                </p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-indigo-600">
+                                <span>Buat Asesmen</span>
+                                <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panduan Pedagogik: Kurikulum Merdeka, Panca Cinta, & Deep Learning -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Pilar Panca Cinta (Kurikulum Berbasis Cinta) -->
+                    <div class="bg-white rounded-3xl p-6 border border-stone-200/80 shadow-sm">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center">
+                                <i class="fa-solid fa-hand-holding-heart"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-stone-900 text-base">Integrasi Kurikulum Berbasis Cinta (Panca Cinta)</h3>
+                                <p class="text-xs text-stone-500">Menumbuhkan empati, moderasi, dan kasih sayang dalam setiap mapel</p>
+                            </div>
+                        </div>
+                        <div class="space-y-2.5 text-xs">
+                            <div class="p-3 rounded-xl bg-rose-50/70 border border-rose-100 flex items-start gap-2.5">
+                                <span class="font-bold text-brand-600">1.</span>
+                                <div><strong class="text-stone-800">Cinta Allah & Rasul-Nya:</strong> <span class="text-stone-600">Menyadari keagungan Tuhan melalui fenomena ilmu pengetahuan dan meneladani akhlak mulia.</span></div>
+                            </div>
+                            <div class="p-3 rounded-xl bg-amber-50/70 border border-amber-100 flex items-start gap-2.5">
+                                <span class="font-bold text-amber-600">2.</span>
+                                <div><strong class="text-stone-800">Cinta Ilmu:</strong> <span class="text-stone-600">Menumbuhkan rasa ingin tahu, nalar kritis, literasi, dan kegemaran belajar sepanjang hayat.</span></div>
+                            </div>
+                            <div class="p-3 rounded-xl bg-emerald-50/70 border border-emerald-100 flex items-start gap-2.5">
+                                <span class="font-bold text-emerald-600">3.</span>
+                                <div><strong class="text-stone-800">Cinta Lingkungan:</strong> <span class="text-stone-600">Kepedulian ekologis, menjaga kelestarian alam, dan gaya hidup berkelanjutan.</span></div>
+                            </div>
+                            <div class="p-3 rounded-xl bg-sky-50/70 border border-sky-100 flex items-start gap-2.5">
+                                <span class="font-bold text-sky-600">4.</span>
+                                <div><strong class="text-stone-800">Cinta Diri & Sesama Manusia:</strong> <span class="text-stone-600">Menghargai diri sendiri, empati sosial, anti-perundungan, gotong royong, dan toleransi.</span></div>
+                            </div>
+                            <div class="p-3 rounded-xl bg-indigo-50/70 border border-indigo-100 flex items-start gap-2.5">
+                                <span class="font-bold text-indigo-600">5.</span>
+                                <div><strong class="text-stone-800">Cinta Tanah Air:</strong> <span class="text-stone-600">Bangga akan budaya bangsa, berkebinekaan global, dan berkontribusi bagi kemajuan Indonesia.</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kerangka Pembelajaran Mendalam (Deep Learning) & Dokumen Terbaru -->
+                    <div class="flex flex-col gap-6">
+                        <div class="bg-white rounded-3xl p-6 border border-stone-200/80 shadow-sm">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center">
+                                    <i class="fa-solid fa-seedling"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-stone-900 text-base">Pendekatan Pembelajaran Mendalam (Deep Learning)</h3>
+                                    <p class="text-xs text-stone-500">Sinergi Kurikulum Merdeka dengan 3 prinsip utama</p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                                <div class="p-3.5 rounded-2xl bg-teal-50/80 border border-teal-100">
+                                    <p class="font-bold text-teal-800 mb-1"><i class="fa-solid fa-eye mr-1"></i> Berkesadaran</p>
+                                    <p class="text-stone-600 leading-relaxed">Siswa hadir utuh secara mental, fokus, dan sadar tujuan belajarnya (<em>Mindful</em>).</p>
+                                </div>
+                                <div class="p-3.5 rounded-2xl bg-amber-50/80 border border-amber-100">
+                                    <p class="font-bold text-amber-800 mb-1"><i class="fa-solid fa-link mr-1"></i> Bermakna</p>
+                                    <p class="text-stone-600 leading-relaxed">Materi terhubung dengan kehidupan nyata & pengalaman siswa (<em>Meaningful</em>).</p>
+                                </div>
+                                <div class="p-3.5 rounded-2xl bg-rose-50/80 border border-rose-100">
+                                    <p class="font-bold text-rose-800 mb-1"><i class="fa-solid fa-face-smile-beam mr-1"></i> Menggembirakan</p>
+                                    <p class="text-stone-600 leading-relaxed">Suasana aman, antusias, bebas tekanan, penuh apresiasi (<em>Joyful</em>).</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Preview Riwayat Terbaru -->
+                        <div class="bg-white rounded-3xl p-6 border border-stone-200/80 shadow-sm flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <h3 class="font-bold text-stone-900 text-base">Dokumen Terakhir Dibuat</h3>
+                                    <button onclick="navigateTo('history')" class="text-xs font-bold text-brand-600 hover:underline">Lihat Semua</button>
+                                </div>
+                                <div id="recent-docs-list" class="space-y-2.5">
+                                    <!-- Diisi lewat JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===============================================================
+                 VIEW 2: GENERATOR & EDITOR DOKUMEN
+            ================================================================ -->
+            <div id="view-generator" class="hidden space-y-6">
+                <!-- Header Generator -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 no-print">
+                    <div>
+                        <div class="flex items-center gap-2 text-xs font-semibold text-stone-500 mb-1">
+                            <button onclick="navigateTo('dashboard')" class="hover:text-brand-600">Dashboard</button>
+                            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                            <span class="text-brand-600">Generator Perangkat Ajar</span>
+                        </div>
+                        <h2 class="text-2xl font-extrabold text-stone-900">Penyusun Perangkat Ajar Cerdas</h2>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button type="button" onclick="openGenerator('Modul Ajar')" class="doc-type-pill px-3.5 py-2 rounded-xl text-xs font-bold border transition" data-type="Modul Ajar">Modul Ajar</button>
+                        <button type="button" onclick="openGenerator('Bahan Ajar')" class="doc-type-pill px-3.5 py-2 rounded-xl text-xs font-bold border transition" data-type="Bahan Ajar">Bahan Ajar</button>
+                        <button type="button" onclick="openGenerator('LKPD')" class="doc-type-pill px-3.5 py-2 rounded-xl text-xs font-bold border transition" data-type="LKPD">LKPD</button>
+                        <button type="button" onclick="openGenerator('Penilaian & Asesmen')" class="doc-type-pill px-3.5 py-2 rounded-xl text-xs font-bold border transition" data-type="Penilaian & Asesmen">Penilaian</button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
+                    <!-- Kolom Kiri: Form Parameter Pedagogik (5 kolom di layar besar) -->
+                    <form id="generator-form" class="xl:col-span-5 bg-white rounded-3xl p-6 border border-stone-200 shadow-sm space-y-5 no-print">
+                        <div class="flex items-center gap-2.5 pb-3 border-b border-stone-100">
+                            <div class="w-8 h-8 rounded-lg bg-brand-100 text-brand-600 flex items-center justify-center text-sm">
+                                <i class="fa-solid fa-sliders"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-stone-900 text-sm">Parameter Perangkat Ajar</h3>
+                                <p class="text-[11px] text-stone-500">Lengkapi konteks kelas Anda untuk hasil yang operasional</p>
+                            </div>
+                        </div>
+
+                        <!-- Jenis Perangkat -->
+                        <div>
+                            <label class="block text-xs font-bold text-stone-700 mb-1.5">Jenis Dokumen</label>
+                            <select id="gen-doc-type" onchange="syncDocTypePills(this.value)" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-stone-50 font-semibold text-sm text-stone-800 focus:border-brand-500 outline-none">
+                                <option value="Modul Ajar">Modul Ajar (Kurikulum Merdeka + Panca Cinta)</option>
+                                <option value="Bahan Ajar">Bahan Ajar Kontekstual & Bermakna</option>
+                                <option value="LKPD">LKPD (Lembar Kerja Peserta Didik)</option>
+                                <option value="Penilaian & Asesmen">Penilaian & Asesmen (Kisi-kisi, Soal HOTS, Rubrik)</option>
+                            </select>
+                        </div>
+
+                        <!-- Jenjang & Fase/Kelas -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold text-stone-700 mb-1.5">Jenjang Pendidikan</label>
+                                <select id="gen-level" onchange="updateFaseOptions()" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white text-sm focus:border-brand-500 outline-none">
+                                    <option value="PAUD / TK">PAUD / TK</option>
+                                    <option value="SD / MI" selected>SD / MI</option>
+                                    <option value="SMP / MTs">SMP / MTs</option>
+                                    <option value="SMA / MA">SMA / MA</option>
+                                    <option value="SMK / MAK">SMK / MAK</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-stone-700 mb-1.5">Fase & Kelas</label>
+                                <select id="gen-fase" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white text-sm focus:border-brand-500 outline-none">
+                                    <!-- Diisi dinamis lewat JS -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Mata Pelajaran & Alokasi Waktu -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold text-stone-700 mb-1.5">Mata Pelajaran / Bidang</label>
+                                <input type="text" id="gen-subject" required placeholder="Misal: IPAS, Matematika, PAI, Bahasa Indonesia"
+                                    class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-sm focus:border-brand-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-stone-700 mb-1.5">Alokasi Waktu</label>
+                                <input type="text" id="gen-duration" required value="2 x 35 Menit (1 Pertemuan)" placeholder="Misal: 2 x 45 Menit"
+                                    class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-sm focus:border-brand-500 outline-none">
+                            </div>
+                        </div>
+
+                        <!-- Topik / Materi Pokok -->
+                        <div>
+                            <label class="block text-xs font-bold text-stone-700 mb-1.5">Topik / Materi Pokok / Elemen CP</label>
+                            <input type="text" id="gen-topic" required placeholder="Misal: Ekosistem & Rantai Makanan, Pecahan Senilai, Toleransi Keberagaman"
+                                class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-sm focus:border-brand-500 outline-none">
+                        </div>
+
+                        <!-- Model Pembelajaran -->
+                        <div>
+                            <label class="block text-xs font-bold text-stone-700 mb-1.5">Model / Strategi Pembelajaran</label>
+                            <select id="gen-model" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 bg-white text-sm focus:border-brand-500 outline-none">
+                                <option value="Problem Based Learning (PBL)">Problem Based Learning (PBL - Berbasis Masalah)</option>
+                                <option value="Project Based Learning (PjBL)">Project Based Learning (PjBL - Berbasis Proyek)</option>
+                                <option value="Discovery Learning">Discovery Learning (Penemuan Terbimbing)</option>
+                                <option value="Inquiry Learning">Inquiry Learning (Penyelidikan Mendalam)</option>
+                                <option value="Pembelajaran Berdiferensiasi & Kooperatif">Pembelajaran Berdiferensiasi & Kooperatif</option>
+                                <option value="Bermain Sambil Belajar (Experiential Play)">Bermain Sambil Belajar (Khusus PAUD / Fase Awal)</option>
+                            </select>
+                        </div>
+
+                        <!-- Pilihan Fokus Panca Cinta (Kurikulum Berbasis Cinta) -->
+                        <div>
+                            <label class="block text-xs font-bold text-stone-700 mb-2">
+                                Fokus Integrasi Panca Cinta (Kurikulum Berbasis Cinta)
+                                <span class="text-brand-600 font-normal">(Pilih 1 atau lebih)</span>
+                            </label>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-stone-200 hover:bg-brand-50/40 cursor-pointer">
+                                    <input type="checkbox" name="panca-cinta" value="Cinta Allah dan Rasul-Nya" checked class="rounded text-brand-600 focus:ring-brand-500">
+                                    <span class="font-medium text-stone-700">Cinta Allah & Rasul-Nya</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-stone-200 hover:bg-brand-50/40 cursor-pointer">
+                                    <input type="checkbox" name="panca-cinta" value="Cinta Ilmu" checked class="rounded text-brand-600 focus:ring-brand-500">
+                                    <span class="font-medium text-stone-700">Cinta Ilmu</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-stone-200 hover:bg-brand-50/40 cursor-pointer">
+                                    <input type="checkbox" name="panca-cinta" value="Cinta Lingkungan" class="rounded text-brand-600 focus:ring-brand-500">
+                                    <span class="font-medium text-stone-700">Cinta Lingkungan</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-stone-200 hover:bg-brand-50/40 cursor-pointer">
+                                    <input type="checkbox" name="panca-cinta" value="Cinta Diri dan Sesama Manusia" checked class="rounded text-brand-600 focus:ring-brand-500">
+                                    <span class="font-medium text-stone-700">Cinta Diri & Sesama</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl border border-stone-200 hover:bg-brand-50/40 cursor-pointer sm:col-span-2">
+                                    <input type="checkbox" name="panca-cinta" value="Cinta Tanah Air" class="rounded text-brand-600 focus:ring-brand-500">
+                                    <span class="font-medium text-stone-700">Cinta Tanah Air & Kebinekaan</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Elemen Pembelajaran Mendalam (Deep Learning) -->
+                        <div>
+                            <label class="block text-xs font-bold text-stone-700 mb-2">Elemen Pembelajaran Mendalam (Deep Learning)</label>
+                            <div class="grid grid-cols-3 gap-2 text-xs">
+                                <label class="flex items-center gap-1.5 p-2.5 rounded-xl border border-teal-200 bg-teal-50/40 cursor-pointer">
+                                    <input type="checkbox" name="deep-learning" value="Berkesadaran (Mindful)" checked class="rounded text-teal-600 focus:ring-teal-500">
+                                    <span class="font-semibold text-teal-900">Mindful</span>
+                                </label>
+                                <label class="flex items-center gap-1.5 p-2.5 rounded-xl border border-amber-200 bg-amber-50/40 cursor-pointer">
+                                    <input type="checkbox" name="deep-learning" value="Bermakna (Meaningful)" checked class="rounded text-amber-600 focus:ring-amber-500">
+                                    <span class="font-semibold text-amber-900">Meaningful</span>
+                                </label>
+                                <label class="flex items-center gap-1.5 p-2.5 rounded-xl border border-rose-200 bg-rose-50/40 cursor-pointer">
+                                    <input type="checkbox" name="deep-learning" value="Menggembirakan (Joyful)" checked class="rounded text-rose-600 focus:ring-rose-500">
+                                    <span class="font-semibold text-rose-900">Joyful</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Konteks Lokal / Catatan Tambahan -->
+                        <div>
+                            <label class="block text-xs font-bold text-stone-700 mb-1.5">Konteks Lokal Sekolah / Catatan Khusus (Opsional)</label>
+                            <textarea id="gen-notes" rows="2" placeholder="Misal: Sekolah berada di lingkungan pedesaan/pertanian, siswa memiliki gaya belajar kinestetik, atau fokus pada literasi numerasi."
+                                class="w-full px-3.5 py-2.5 rounded-xl border border-stone-200 text-sm focus:border-brand-500 outline-none"></textarea>
+                        </div>
+
+                        <button type="submit" id="btn-generate" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-brand-600 to-rose-500 hover:from-brand-700 hover:to-rose-600 text-white font-bold text-sm shadow-lg shadow-brand-600/25 transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span>Susun Perangkat Ajar Sekarang</span>
+                        </button>
+                    </form>
+
+                    <!-- Kolom Kanan: Area Pratinjau, Editor, & Ekspor Dokumen (7 kolom di layar besar) -->
+                    <div class="xl:col-span-7 space-y-4">
+                        <!-- Toolbar Aksi Dokumen -->
+                        <div class="bg-white rounded-2xl p-3.5 border border-stone-200 shadow-sm flex flex-wrap items-center justify-between gap-3 no-print">
+                            <div class="flex items-center gap-2">
+                                <button type="button" id="btn-toggle-edit" onclick="toggleDocumentEdit()" disabled
+                                    class="px-3.5 py-2 rounded-xl text-xs font-bold bg-stone-100 text-stone-700 hover:bg-stone-200 disabled:opacity-40 transition flex items-center gap-1.5">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                    <span id="edit-btn-text">Edit Langsung</span>
+                                </button>
+                                <button type="button" id="btn-save-doc" onclick="saveCurrentDocument()" disabled
+                                    class="px-3.5 py-2 rounded-xl text-xs font-bold bg-teal-600 text-white hover:bg-teal-700 disabled:opacity-40 transition flex items-center gap-1.5">
+                                    <i class="fa-solid fa-floppy-disk"></i>
+                                    <span>Simpan ke Arsip</span>
+                                </button>
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <button type="button" id="btn-copy-doc" onclick="copyDocumentText()" disabled
+                                    class="px-3 py-2 rounded-xl text-xs font-semibold border border-stone-200 text-stone-700 hover:bg-stone-50 disabled:opacity-40 transition flex items-center gap-1.5" title="Salin Teks">
+                                    <i class="fa-regular fa-copy"></i>
+                                    <span class="hidden sm:inline">Salin</span>
+                                </button>
+                                <button type="button" id="btn-export-word" onclick="exportToWord()" disabled
+                                    class="px-3 py-2 rounded-xl text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100 disabled:opacity-40 transition flex items-center gap-1.5" title="Unduh Microsoft Word (.doc)">
+                                    <i class="fa-solid fa-file-word"></i>
+                                    <span>Unduh Word</span>
+                                </button>
+                                <button type="button" id="btn-print-pdf" onclick="window.print()" disabled
+                                    class="px-3 py-2 rounded-xl text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200 hover:bg-brand-100 disabled:opacity-40 transition flex items-center gap-1.5" title="Cetak / Simpan PDF">
+                                    <i class="fa-solid fa-print"></i>
+                                    <span>Cetak / PDF</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Banner Mode Edit Aktif -->
+                        <div id="edit-mode-banner" class="hidden bg-amber-50 border border-amber-200 text-amber-800 px-4 py-2.5 rounded-xl text-xs font-medium flex items-center justify-between no-print">
+                            <span><i class="fa-solid fa-circle-info mr-1.5"></i> <strong>Mode Edit Aktif:</strong> Klik langsung pada teks atau tabel di bawah untuk menyunting isi dokumen.</span>
+                            <button onclick="toggleDocumentEdit()" class="font-bold underline ml-2">Selesai Edit</button>
+                        </div>
+
+                        <!-- Kertas Dokumen Hasil Generate -->
+                        <div class="bg-white rounded-3xl border border-stone-200 shadow-sm min-h-[620px] p-6 sm:p-10 relative">
+                            <!-- State Kosong / Awal -->
+                            <div id="doc-empty-state" class="h-full min-h-[520px] flex flex-col items-center justify-center text-center max-w-md mx-auto py-12">
+                                <div class="w-20 h-20 rounded-3xl bg-brand-50 text-brand-500 flex items-center justify-center text-3xl mb-5 shadow-inner">
+                                    <i class="fa-solid fa-file-signature"></i>
+                                </div>
+                                <h3 class="text-lg font-extrabold text-stone-900">Ruang Pratinjau Dokumen Siap</h3>
+                                <p class="text-xs sm:text-sm text-stone-500 mt-2 leading-relaxed">
+                                    Isi parameter jenjang, mata pelajaran, topik, dan fokus <strong>Panca Cinta</strong> di panel sebelah kiri, lalu klik <strong>Susun Perangkat Ajar Sekarang</strong>.
+                                </p>
+                            </div>
+
+                            <!-- State Loading AI -->
+                            <div id="doc-loading-state" class="hidden h-full min-h-[520px] flex flex-col items-center justify-center text-center max-w-md mx-auto py-12">
+                                <div class="relative w-20 h-20 flex items-center justify-center mb-5">
+                                    <div class="absolute inset-0 rounded-full border-4 border-brand-100"></div>
+                                    <div class="absolute inset-0 rounded-full border-4 border-brand-600 border-t-transparent animate-spin"></div>
+                                    <i class="fa-solid fa-heart text-brand-600 text-2xl animate-pulse"></i>
+                                </div>
+                                <h3 class="text-lg font-extrabold text-stone-900">Meracik Perangkat Ajar Penuh Cinta...</h3>
+                                <p id="loading-subtext" class="text-xs sm:text-sm text-stone-500 mt-2 leading-relaxed">
+                                    AI sedang menyelaraskan Capaian Pembelajaran Kurikulum Merdeka, nilai-nilai Panca Cinta, dan sintaks Pembelajaran Mendalam...
+                                </p>
+                            </div>
+
+                            <!-- Konten Dokumen Resmi (Printable) -->
+                            <div id="printable-area" class="hidden">
+                                <div id="doc-content" class="doc-paper" contenteditable="false"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===============================================================
+                 VIEW 3: RIWAYAT & ARSIP DOKUMEN
+            ================================================================ -->
+            <div id="view-history" class="hidden space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-2xl font-extrabold text-stone-900">Arsip Perangkat Ajar Saya</h2>
+                        <p class="text-xs sm:text-sm text-stone-500 mt-0.5">Buka kembali, sunting, cetak, atau ekspor perangkat ajar yang telah Anda buat</p>
+                    </div>
+                    <button onclick="openGenerator('Modul Ajar')" class="px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs shadow-sm transition flex items-center gap-2 self-start">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Buat Dokumen Baru</span>
+                    </button>
+                </div>
+
+                <!-- Filter & Pencarian -->
+                <div class="bg-white rounded-2xl p-4 border border-stone-200 flex flex-col sm:flex-row gap-3">
+                    <div class="relative flex-1">
+                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-stone-400">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
+                        <input type="text" id="history-search" oninput="renderHistoryList()" placeholder="Cari berdasarkan topik, mata pelajaran, atau jenjang..."
+                            class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:border-brand-500 outline-none">
+                    </div>
+                    <select id="history-filter-type" onchange="renderHistoryList()" class="px-4 py-2.5 rounded-xl border border-stone-200 bg-white text-sm font-medium text-stone-700 outline-none">
+                        <option value="ALL">Semua Jenis Perangkat</option>
+                        <option value="Modul Ajar">Modul Ajar</option>
+                        <option value="Bahan Ajar">Bahan Ajar</option>
+                        <option value="LKPD">LKPD</option>
+                        <option value="Penilaian & Asesmen">Penilaian & Asesmen</option>
+                    </select>
+                </div>
+
+                <!-- Grid Kartu Dokumen Tersimpan -->
+                <div id="history-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <!-- Diisi dinamis lewat JS -->
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- =====================================================================
+         SCRIPT UTAMA: AUTH, PERSISTENCE (FIREBASE / LOCAL), GEMINI AI, & EKSPOR
+    ====================================================================== -->
+    <script type="module">
+        // Import Firebase jika tersedia di environment
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, doc, setDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Konfigurasi State Global
+        const APP_STORAGE_USERS = 'pendidikbermakna_users_v1';
+        const APP_STORAGE_SESSION = 'pendidikbermakna_session_v1';
+        const APP_STORAGE_DOCS_PREFIX = 'pendidikbermakna_docs_';
+
+        let currentUser = null;
+        let savedDocuments = [];
+        let currentDocMeta = null; // Menyimpan metadata dokumen yang sedang tampil di editor
+        let isEditingDoc = false;
+
+        // Variabel Firebase Opsional
+        let db = null;
+        let auth = null;
+        let firebaseUser = null;
+        let unsubscribeSnapshot = null;
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'pendidik-bermakna-app';
+
+        // Inisialisasi Firebase secara aman (jika config environment tersedia)
+        async function initFirebaseSafely() {
+            try {
+                if (typeof __firebase_config !== 'undefined' && __firebase_config) {
+                    const firebaseConfig = JSON.parse(__firebase_config);
+                    const app = initializeApp(firebaseConfig);
+                    auth = getAuth(app);
+                    db = getFirestore(app);
+
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                    firebaseUser = auth.currentUser;
+                }
+            } catch (err) {
+                console.warn("Mode penyimpanan lokal aktif:", err.message);
+            }
+        }
+
+        // Data Fase Kurikulum Merdeka per Jenjang
+        const FASE_MAP = {
+            'PAUD / TK': ['Fase Fondasi (Usia 4–6 Tahun / TK A & TK B)'],
+            'SD / MI': [
+                'Fase A — Kelas 1 SD/MI',
+                'Fase A — Kelas 2 SD/MI',
+                'Fase B — Kelas 3 SD/MI',
+                'Fase B — Kelas 4 SD/MI',
+                'Fase C — Kelas 5 SD/MI',
+                'Fase C — Kelas 6 SD/MI'
+            ],
+            'SMP / MTs': [
+                'Fase D — Kelas 7 SMP/MTs',
+                'Fase D — Kelas 8 SMP/MTs',
+                'Fase D — Kelas 9 SMP/MTs'
+            ],
+            'SMA / MA': [
+                'Fase E — Kelas 10 SMA/MA',
+                'Fase F — Kelas 11 SMA/MA',
+                'Fase F — Kelas 12 SMA/MA'
+            ],
+            'SMK / MAK': [
+                'Fase E — Kelas 10 SMK/MAK',
+                'Fase F — Kelas 11 SMK/MAK',
+                'Fase F — Kelas 12 SMK/MAK'
+            ]
+        };
+
+        // =====================================================================
+        // UTILITAS UI (TOAST & MODAL KONFIRMASI)
+        // =====================================================================
+        window.showToast = function(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const colors = {
+                success: 'bg-teal-700 text-white border-teal-800',
+                error: 'bg-rose-600 text-white border-rose-700',
+                info: 'bg-stone-800 text-white border-stone-900'
+            };
+            const icons = {
+                success: 'fa-circle-check',
+                error: 'fa-circle-exclamation',
+                info: 'fa-circle-info'
+            };
+            toast.className = `pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-2xl shadow-xl border text-xs sm:text-sm font-medium transform transition-all duration-300 translate-y-2 opacity-0 ${colors[type] || colors.info}`;
+            toast.innerHTML = `
+                <i class="fa-solid ${icons[type] || icons.info} text-base shrink-0"></i>
+                <span class="flex-1">${message}</span>
+            `;
+            container.appendChild(toast);
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            });
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        };
+
+        window.showConfirm = function(title, message) {
+            return new Promise((resolve) => {
+                const modal = document.getElementById('confirm-modal');
+                document.getElementById('confirm-title').textContent = title;
+                document.getElementById('confirm-message').textContent = message;
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+
+                const cleanup = (result) => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                    resolve(result);
+                };
+
+                document.getElementById('confirm-ok-btn').onclick = () => cleanup(true);
+                document.getElementById('confirm-cancel-btn').onclick = () => cleanup(false);
+            });
+        };
+
+        // =====================================================================
+        // SISTEM AUTENTIKASI EMAIL (LOGIN, DAFTAR, DEMO, LOGOUT)
+        // =====================================================================
+        window.switchAuthTab = function(mode) {
+            const loginForm = document.getElementById('login-form');
+            const regForm = document.getElementById('register-form');
+            const tabLogin = document.getElementById('tab-login');
+            const tabReg = document.getElementById('tab-register');
+            const heading = document.getElementById('auth-heading');
+            const subheading = document.getElementById('auth-subheading');
+
+            if (mode === 'login') {
+                loginForm.classList.remove('hidden');
+                regForm.classList.add('hidden');
+                tabLogin.className = 'flex-1 py-2.5 text-sm font-bold rounded-xl bg-white text-brand-600 shadow-sm transition';
+                tabReg.className = 'flex-1 py-2.5 text-sm font-semibold rounded-xl text-stone-600 hover:text-stone-900 transition';
+                heading.textContent = 'Selamat Datang Kembali, Bapak/Ibu Guru!';
+                subheading.textContent = 'Silakan masuk menggunakan alamat email terdaftar Anda.';
+            } else {
+                loginForm.classList.add('hidden');
+                regForm.classList.remove('hidden');
+                tabReg.className = 'flex-1 py-2.5 text-sm font-bold rounded-xl bg-white text-brand-600 shadow-sm transition';
+                tabLogin.className = 'flex-1 py-2.5 text-sm font-semibold rounded-xl text-stone-600 hover:text-stone-900 transition';
+                heading.textContent = 'Buat Akun Pendidik Bermakna';
+                subheading.textContent = 'Daftarkan email Anda untuk menyimpan seluruh perangkat ajar secara aman.';
+            }
+        };
+
+        window.togglePassword = function(inputId, btn) {
+            const input = document.getElementById(inputId);
+            const icon = btn.querySelector('i');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        };
+
+        // Handle Registrasi Email
+        document.getElementById('register-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('reg-name').value.trim();
+            const level = document.getElementById('reg-level').value;
+            const school = document.getElementById('reg-school').value.trim();
+            const email = document.getElementById('reg-email').value.trim().toLowerCase();
+            const password = document.getElementById('reg-password').value;
+
+            const users = JSON.parse(localStorage.getItem(APP_STORAGE_USERS) || '[]');
+            if (users.some(u => u.email === email)) {
+                showToast('Email ini sudah terdaftar. Silakan langsung masuk.', 'error');
+                switchAuthTab('login');
+                document.getElementById('login-email').value = email;
+                return;
+            }
+
+            const newUser = {
+                id: 'usr_' + Date.now(),
+                name,
+                level,
+                school,
+                email,
+                password
+            };
+            users.push(newUser);
+            localStorage.setItem(APP_STORAGE_USERS, JSON.stringify(users));
+
+            setActiveUser(newUser);
+            showToast(`Pendaftaran berhasil! Selamat datang, ${name}.`, 'success');
+        });
+
+        // Handle Login Email
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value.trim().toLowerCase();
+            const password = document.getElementById('login-password').value;
+
+            const users = JSON.parse(localStorage.getItem(APP_STORAGE_USERS) || '[]');
+            const foundUser = users.find(u => u.email === email);
+
+            if (!foundUser) {
+                showToast('Email belum terdaftar. Silakan klik tab "Daftar Baru" terlebih dahulu.', 'error');
+                return;
+            }
+            if (foundUser.password !== password) {
+                showToast('Kata sandi yang Anda masukkan salah.', 'error');
+                return;
+            }
+
+            setActiveUser(foundUser);
+            showToast(`Berhasil masuk sebagai ${foundUser.name}`, 'success');
+        });
+
+        function setActiveUser(user) {
+            currentUser = user;
+            localStorage.setItem(APP_STORAGE_SESSION, JSON.stringify(user));
+
+            // Update UI Profil
+            document.getElementById('user-display-name').textContent = user.name;
+            document.getElementById('user-display-email').textContent = user.email;
+            document.getElementById('user-display-level').textContent = user.level || 'Semua Jenjang';
+            document.getElementById('user-display-school').textContent = user.school || 'Satuan Pendidikan';
+
+            const initials = user.name.split(' ').slice(0, 2).map(n => n[0]).join('').toUpperCase();
+            document.getElementById('user-avatar').textContent = initials || 'GR';
+            document.getElementById('dash-greeting').textContent = `Assalamu'alaikum & Salam Bahagia, ${user.name}!`;
+
+            // Set default jenjang pada form generator sesuai profil guru
+            if (user.level && FASE_MAP[user.level]) {
+                document.getElementById('gen-level').value = user.level;
+                updateFaseOptions();
+            }
+
+            // Switch layar ke Aplikasi
+            document.getElementById('auth-screen').classList.add('hidden');
+            document.getElementById('app-screen').classList.remove('hidden');
+
+            loadUserDocuments();
+            navigateTo('dashboard');
+        }
+
+        window.handleLogout = async function() {
+            const ok = await showConfirm('Keluar dari Akun?', 'Anda akan keluar dari sesi saat ini. Semua dokumen yang telah disimpan tetap aman.');
+            if (!ok) return;
+
+            if (unsubscribeSnapshot) {
+                unsubscribeSnapshot();
+                unsubscribeSnapshot = null;
+            }
+            currentUser = null;
+            savedDocuments = [];
+            localStorage.removeItem(APP_STORAGE_SESSION);
+
+            document.getElementById('app-screen').classList.add('hidden');
+            document.getElementById('auth-screen').classList.remove('hidden');
+            showToast('Anda telah keluar dari akun.', 'info');
+        };
+
+        // =====================================================================
+        // PENYIMPANAN DOKUMEN PERSISTEN (FIRESTORE + LOCALSTORAGE FALLBACK)
+        // =====================================================================
+        function getUserStorageKey() {
+            return APP_STORAGE_DOCS_PREFIX + (currentUser ? currentUser.email : 'guest');
+        }
+
+        function loadUserDocuments() {
+            if (!currentUser) return;
+
+            // Load dari localStorage terlebih dahulu agar instan
+            const localData = JSON.parse(localStorage.getItem(getUserStorageKey()) || '[]');
+            savedDocuments = localData;
+            updateDashboardStatsAndLists();
+
+            // Jika Firebase Firestore aktif, sinkronkan secara real-time
+            if (db && firebaseUser) {
+                try {
+                    const safeEmailKey = currentUser.email.replace(/[^a-zA-Z0-9]/g, '_');
+                    const colRef = collection(db, 'artifacts', appId, 'public', 'data', `docs_${safeEmailKey}`);
+                    if (unsubscribeSnapshot) unsubscribeSnapshot();
+
+                    unsubscribeSnapshot = onSnapshot(colRef, (snapshot) => {
+                        const cloudDocs = [];
+                        snapshot.forEach((docSnap) => {
+                            cloudDocs.push(docSnap.data());
+                        });
+                        if (cloudDocs.length > 0) {
+                            cloudDocs.sort((a, b) => b.createdAt - a.createdAt);
+                            savedDocuments = cloudDocs;
+                            localStorage.setItem(getUserStorageKey(), JSON.stringify(savedDocuments));
+                            updateDashboardStatsAndLists();
+                        }
+                    }, (error) => {
+                        console.warn('Firestore sync fallback ke localStorage:', error.message);
+                    });
+                } catch (e) {
+                    console.warn('Firestore listener error:', e);
+                }
+            }
+        }
+
+        window.saveCurrentDocument = async function() {
+            if (!currentDocMeta || !currentUser) return;
+
+            const htmlContent = document.getElementById('doc-content').innerHTML;
+            const docRecord = {
+                ...currentDocMeta,
+                htmlContent: htmlContent,
+                updatedAt: Date.now()
+            };
+
+            // Simpan ke array & localStorage
+            const existingIdx = savedDocuments.findIndex(d => d.id === docRecord.id);
+            if (existingIdx >= 0) {
+                savedDocuments[existingIdx] = docRecord;
+            } else {
+                savedDocuments.unshift(docRecord);
+            }
+            localStorage.setItem(getUserStorageKey(), JSON.stringify(savedDocuments));
+
+            // Simpan ke Firestore jika tersedia
+            if (db && firebaseUser) {
+                try {
+                    const safeEmailKey = currentUser.email.replace(/[^a-zA-Z0-9]/g, '_');
+                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', `docs_${safeEmailKey}`, docRecord.id);
+                    await setDoc(docRef, docRecord);
+                } catch (err) {
+                    console.warn('Gagal simpan ke cloud, tersimpan di penyimpanan lokal:', err.message);
+                }
+            }
+
+            updateDashboardStatsAndLists();
+            showToast('Dokumen berhasil disimpan ke Arsip Anda!', 'success');
+        };
+
+        window.deleteDocument = async function(docId) {
+            const ok = await showConfirm('Hapus Dokumen?', 'Dokumen perangkat ajar ini akan dihapus secara permanen dari arsip Anda.');
+            if (!ok) return;
+
+            savedDocuments = savedDocuments.filter(d => d.id !== docId);
+            localStorage.setItem(getUserStorageKey(), JSON.stringify(savedDocuments));
+
+            if (db && firebaseUser && currentUser) {
+                try {
+                    const safeEmailKey = currentUser.email.replace(/[^a-zA-Z0-9]/g, '_');
+                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', `docs_${safeEmailKey}`, docId);
+                    await deleteDoc(docRef);
+                } catch (err) {
+                    console.warn('Cloud delete warning:', err.message);
+                }
+            }
+
+            updateDashboardStatsAndLists();
+            showToast('Dokumen berhasil dihapus.', 'info');
+        };
+
+        window.openSavedDocument = function(docId) {
+            const found = savedDocuments.find(d => d.id === docId);
+            if (!found) return;
+
+            currentDocMeta = { ...found };
+            navigateTo('generator');
+            syncDocTypePills(found.docType);
+            document.getElementById('gen-doc-type').value = found.docType;
+            if (found.level) {
+                document.getElementById('gen-level').value = found.level;
+                updateFaseOptions();
+            }
+            if (found.fase) document.getElementById('gen-fase').value = found.fase;
+            if (found.subject) document.getElementById('gen-subject').value = found.subject;
+            if (found.topic) document.getElementById('gen-topic').value = found.topic;
+
+            renderGeneratedHTML(found.htmlContent);
+            showToast(`Membuka dokumen: ${found.topic}`, 'info');
+        };
+
+        // =====================================================================
+        // NAVIGASI & UPDATE STATISTIK DASHBOARD
+        // =====================================================================
+        window.navigateTo = function(viewName) {
+            document.getElementById('view-dashboard').classList.add('hidden');
+            document.getElementById('view-generator').classList.add('hidden');
+            document.getElementById('view-history').classList.add('hidden');
+
+            document.getElementById(`view-${viewName}`).classList.remove('hidden');
+
+            // Highlight menu aktif di sidebar
+            document.querySelectorAll('.nav-item').forEach(btn => {
+                btn.className = 'nav-item w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium text-stone-600 hover:bg-stone-100 transition';
+                if (!btn.querySelector('#sidebar-doc-count')) {
+                    btn.className = 'nav-item w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-stone-600 hover:bg-stone-100 transition';
+                }
+            });
+
+            let activeNavKey = viewName;
+            if (viewName === 'generator') {
+                const t = document.getElementById('gen-doc-type').value;
+                if (t === 'Modul Ajar') activeNavKey = 'gen-modul';
+                else if (t === 'Bahan Ajar') activeNavKey = 'gen-bahan';
+                else if (t === 'LKPD') activeNavKey = 'gen-lkpd';
+                else activeNavKey = 'gen-asesmen';
+            }
+
+            const activeBtn = document.querySelector(`.nav-item[data-nav="${activeNavKey}"]`);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-stone-600', 'hover:bg-stone-100', 'font-medium');
+                activeBtn.classList.add('bg-brand-600', 'text-white', 'font-semibold', 'shadow-sm');
+            }
+
+            if (viewName === 'history') {
+                renderHistoryList();
+            }
+
+            // Tutup sidebar mobile jika terbuka
+            const sidebar = document.getElementById('sidebar');
+            const backdrop = document.getElementById('sidebar-backdrop');
+            sidebar.classList.add('-translate-x-full');
+            backdrop.classList.add('hidden');
+        };
+
+        window.toggleMobileSidebar = function() {
+            const sidebar = document.getElementById('sidebar');
+            const backdrop = document.getElementById('sidebar-backdrop');
+            sidebar.classList.toggle('-translate-x-full');
+            backdrop.classList.toggle('hidden');
+        };
+
+        window.openGenerator = function(docType) {
+            document.getElementById('gen-doc-type').value = docType;
+            syncDocTypePills(docType);
+            navigateTo('generator');
+        };
+
+        window.syncDocTypePills = function(selectedType) {
+            document.querySelectorAll('.doc-type-pill').forEach(pill => {
+                if (pill.dataset.type === selectedType) {
+                    pill.className = 'doc-type-pill px-3.5 py-2 rounded-xl text-xs font-bold border border-brand-600 bg-brand-600 text-white shadow-sm transition';
+                } else {
+                    pill.className = 'doc-type-pill px-3.5 py-2 rounded-xl text-xs font-bold border border-stone-200 bg-white text-stone-600 hover:bg-stone-50 transition';
+                }
+            });
+        };
+
+        window.updateFaseOptions = function() {
+            const level = document.getElementById('gen-level').value;
+            const faseSelect = document.getElementById('gen-fase');
+            const options = FASE_MAP[level] || [];
+            faseSelect.innerHTML = options.map(opt => `<option value="${opt}">${opt}</option>`).join('');
+        };
+
+        function updateDashboardStatsAndLists() {
+            const modulCount = savedDocuments.filter(d => d.docType === 'Modul Ajar').length;
+            const bahanCount = savedDocuments.filter(d => d.docType === 'Bahan Ajar').length;
+            const lkpdCount = savedDocuments.filter(d => d.docType === 'LKPD').length;
+            const asesmenCount = savedDocuments.filter(d => d.docType === 'Penilaian & Asesmen').length;
+
+            document.getElementById('stat-modul').textContent = modulCount;
+            document.getElementById('stat-bahan').textContent = bahanCount;
+            document.getElementById('stat-lkpd').textContent = lkpdCount;
+            document.getElementById('stat-asesmen').textContent = asesmenCount;
+            document.getElementById('sidebar-doc-count').textContent = savedDocuments.length;
+
+            // Update daftar dokumen terbaru di dashboard
+            const recentList = document.getElementById('recent-docs-list');
+            if (savedDocuments.length === 0) {
+                recentList.innerHTML = `
+                    <div class="text-center py-6 px-4 rounded-2xl bg-stone-50 border border-dashed border-stone-200">
+                        <p class="text-xs text-stone-500">Belum ada perangkat ajar yang disimpan. Mulai buat dokumen pertama Anda!</p>
+                    </div>
+                `;
+            } else {
+                recentList.innerHTML = savedDocuments.slice(0, 3).map(docItem => `
+                    <div onclick="openSavedDocument('${docItem.id}')" class="cursor-pointer p-3 rounded-xl border border-stone-100 hover:border-brand-200 hover:bg-brand-50/30 transition flex items-center justify-between gap-3">
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-2">
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-brand-100 text-brand-700">${docItem.docType}</span>
+                                <span class="text-[11px] text-stone-400">${docItem.level}</span>
+                            </div>
+                            <p class="text-xs font-bold text-stone-800 truncate mt-1">${docItem.topic} — ${docItem.subject}</p>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-xs text-stone-400"></i>
+                    </div>
+                `).join('');
+            }
+
+            renderHistoryList();
+        }
+
+        window.renderHistoryList = function() {
+            const grid = document.getElementById('history-grid');
+            const query = (document.getElementById('history-search').value || '').toLowerCase();
+            const filterType = document.getElementById('history-filter-type').value;
+
+            const filtered = savedDocuments.filter(d => {
+                const matchType = filterType === 'ALL' || d.docType === filterType;
+                const matchQuery = !query ||
+                    (d.topic && d.topic.toLowerCase().includes(query)) ||
+                    (d.subject && d.subject.toLowerCase().includes(query)) ||
+                    (d.level && d.level.toLowerCase().includes(query));
+                return matchType && matchQuery;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full bg-white rounded-3xl p-12 border border-dashed border-stone-300 text-center">
+                        <div class="w-16 h-16 rounded-2xl bg-stone-100 text-stone-400 flex items-center justify-center text-2xl mx-auto mb-3">
+                            <i class="fa-solid fa-folder-open"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-stone-800">Tidak Ada Dokumen Ditemukan</h3>
+                        <p class="text-xs text-stone-500 mt-1 max-w-md mx-auto">Anda belum menyimpan perangkat ajar atau kata kunci pencarian tidak cocok.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(item => {
+                const dateStr = new Date(item.updatedAt || item.createdAt).toLocaleDateString('id-ID', {
+                    day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                });
+                const badgeColors = {
+                    'Modul Ajar': 'bg-brand-100 text-brand-700',
+                    'Bahan Ajar': 'bg-amber-100 text-amber-700',
+                    'LKPD': 'bg-teal-100 text-teal-700',
+                    'Penilaian & Asesmen': 'bg-indigo-100 text-indigo-700'
+                };
+                const badgeClass = badgeColors[item.docType] || 'bg-stone-100 text-stone-700';
+
+                return `
+                    <div class="bg-white rounded-2xl p-5 border border-stone-200 hover:shadow-md transition flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="text-[11px] font-bold px-2.5 py-1 rounded-lg ${badgeClass}">${item.docType}</span>
+                                <span class="text-[11px] font-medium text-stone-400">${item.level}</span>
+                            </div>
+                            <h4 class="font-bold text-stone-900 text-base line-clamp-2">${item.topic}</h4>
+                            <p class="text-xs font-semibold text-brand-600 mt-1">${item.subject} &bull; ${item.fase}</p>
+                            <p class="text-[11px] text-stone-400 mt-3 flex items-center gap-1.5">
+                                <i class="fa-regular fa-clock"></i>
+                                <span>Diperbarui: ${dateStr}</span>
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-stone-100 flex items-center gap-2">
+                            <button onclick="openSavedDocument('${item.id}')" class="flex-1 py-2 px-3 rounded-xl bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold text-xs transition flex items-center justify-center gap-1.5">
+                                <i class="fa-solid fa-eye"></i>
+                                <span>Buka & Edit</span>
+                            </button>
+                            <button onclick="deleteDocument('${item.id}')" class="p-2 rounded-xl text-stone-400 hover:text-rose-600 hover:bg-rose-50 transition" title="Hapus Dokumen">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        };
+
+        // =====================================================================
+        // GENERATOR PERANGKAT AJAR TERINTEGRASI GEMINI API
+        // =====================================================================
+        async function callGeminiWithRetry(payload, maxRetries = 4) {
+            const apiKey = ""; // Disediakan otomatis oleh runtime environment
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+            let delay = 1000;
+            for (let attempt = 0; attempt <= maxRetries; attempt++) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+                    if (!text) throw new Error('Respon AI kosong');
+                    return text;
+                } catch (err) {
+                    if (attempt === maxRetries) throw err;
+                    await new Promise(res => setTimeout(res, delay));
+                    delay *= 2;
+                }
+            }
+        }
+
+        function buildPedagogicalPrompt(params) {
+            const systemInstruction = `Anda adalah Pakar Pengembang Kurikulum Nasional Indonesia, Master Teacher Kurikulum Merdeka, Pelopor Kurikulum Berbasis Cinta (KBC - Panca Cinta), dan Spesialis Pembelajaran Mendalam (Deep Learning: Mindful, Meaningful, Joyful).
+
+TUGAS ANDA:
+Menyusun dokumen perangkat ajar resmi dalam format HTML bersih (tanpa tag <html>, <head>, <body>, dan tanpa blok markdown \`\`\`html) yang SANGAT OPERASIONAL, MENDALAM, KONTEKSTUAL, SIAP PAKAI DI KELAS, dan TIDAK NORMATIF/KLISE.
+
+ATURAN FORMAT HTML:
+- Gunakan <h1> untuk judul utama dokumen.
+- Gunakan <h2> untuk setiap bagian/bab utama.
+- Gunakan <h3> untuk sub-bagian.
+- Gunakan <table> dengan <thead> dan <tbody> untuk identitas dokumen, langkah pembelajaran, kisi-kisi, maupun rubrik penilaian.
+- Gunakan <div class="cinta-box">...</div> untuk menyoroti integrasi nilai-nilai Panca Cinta (Kurikulum Berbasis Cinta).
+- Gunakan <div class="deep-box">...</div> untuk menyoroti pengalaman belajar Mendalam (Berkesadaran/Mindful, Bermakna/Meaningful, Menggembirakan/Joyful).
+- Gunakan kalimat instruksional nyata yang diucapkan/dilakukan guru dan aktivitas konkret yang dilakukan peserta didik sesuai tingkat perkembangan usia jenjang tersebut.`;
+
+            let specificStructure = '';
+            if (params.docType === 'Modul Ajar') {
+                specificStructure = `
+Susun **MODUL AJAR KURIKULUM MERDEKA TERINTEGRASI PANCA CINTA & DEEP LEARNING** dengan struktur lengkap:
+1. **IDENTITAS MODUL** (Tabel: Nama Penyusun: ${params.teacherName}, Satuan Pendidikan: ${params.schoolName}, Jenjang/Fase/Kelas: ${params.level} / ${params.fase}, Mata Pelajaran: ${params.subject}, Topik/Materi: ${params.topic}, Alokasi Waktu: ${params.duration}, Model Pembelajaran: ${params.model}).
+2. **IDENTIFIKASI KESIAPAN & PROFIL MURID** (Kompetensi Awal konkret, Dimensi Profil Pelajar Pancasila / 8 Dimensi Profil Lulusan yang relevan, serta Target Peserta Didik termasuk strategi diferensiasi).
+3. **INTEGRASI KURIKULUM BERBASIS CINTA (PANCA CINTA)** (Dalam kotak <div class="cinta-box">, jelaskan secara spesifik bagaimana topik "${params.topic}" menumbuhkan pilar: ${params.pancaCinta.join(', ')} melalui perilaku nyata di kelas).
+4. **KOMPONEN INTI & PEMAHAMAN MENDALAM**:
+   - **Tujuan Pembelajaran (TP)** dengan format lengkap ABCD (Audience, Behavior, Condition, Degree) dan level kognitif HOTS/SOLO Taxonomy.
+   - **Pemahaman Bermakna (Meaningful Understanding)** yang menyentuh kehidupan sehari-hari siswa.
+   - **Pertanyaan Pemantik** (3-4 pertanyaan terbuka yang memicu rasa ingin tahu & empati).
+   - **Sarana, Prasarana & Sumber Belajar Kontekstual**.
+5. **LANGKAH-LANGKAH PEMBELAJARAN MENDALAM** (Tabel detail memuat Tahap, Deskripsi Kegiatan Guru & Murid yang operasional, Integrasi Panca Cinta & Deep Learning [${params.deepLearning.join(', ')}], serta Estimasi Waktu):
+   - **A. Kegiatan Pendahuluan (Berkesadaran / Mindful & Joyful)**: Salam hangat penuh cinta, teknik mindfulness singkat/cek emosi siswa, apersepsi kontekstual, penyampaian tujuan.
+   - **B. Kegiatan Inti (Sintaks ${params.model} dipadukan siklus Deep Learning: 1. Memahami / Understand, 2. Mengaplikasi / Apply, 3. Merefleksi / Reflect)**: Jabarkan langkah nyata diskusi, eksplorasi, dan kolaborasi penuh kasih sayang.
+   - **C. Kegiatan Penutup**: Kesimpulan bersama, penguatan nilai cinta, umpan balik apresiatif, dan doa/salam penutup.
+6. **ASESMEN PEMBELAJARAN** (Asesmen Awal/Diagnostik, Asesmen Formatif saat proses, dan Asesmen Sumatif beserta instrumen singkatnya).
+7. **PENGAYAAN, REMEDIAL, & REFLEKSI GURU/MURID** (Pertanyaan refleksi diri untuk murid dan refleksi pedagogis untuk guru).`;
+            } else if (params.docType === 'Bahan Ajar') {
+                specificStructure = `
+Susun **BAHAN AJAR KONTEKSTUAL & BERMAKNA (KURIKULUM MERDEKA & PANCA CINTA)** dengan struktur:
+1. **HEADER IDENTITAS BAHAN AJAR** (Tabel Mata Pelajaran, Jenjang/Fase/Kelas, Topik, Penyusun).
+2. **PETA KONSEP & TUJUAN BELAJAR** (Visualisasi alur materi dalam bentuk poin/tabel terstruktur yang mudah dipahami siswa jenjang ${params.level}).
+3. **APERSEPSI & KISAH PEMANTIK BERMAKNA** (Cerita pendek, studi kasus nyata di Indonesia, atau fenomena sehari-hari yang dekat dengan dunia siswa untuk membangun koneksi emosional).
+4. **URAIAN MATERI MENDALAM & KONTEKSTUAL** (Penjelasan konsep inti secara runtut, bahasa komunikatif sesuai usia ${params.fase}, dilengkapi analogi nyata, tabel perbandingan, atau langkah praktis).
+5. **JEJAK PANCA CINTA DALAM MATERI INI** (Dalam <div class="cinta-box">, uraikan hikmah, nilai spiritual, kepedulian lingkungan, empati sesama, dan cinta tanah air terkait "${params.topic}").
+6. **EKSPLORASI MANDIRI & CONTOH SOAL BERTINGKAT** (3 contoh soal dari level pemahaman dasar, aplikasi kontekstual, hingga penalaran HOTS lengkap dengan pembahasan langkah demi langkah).
+7. **RANGKUMAN INTI & GLOSARIUM** (Poin-poin kunci yang mudah diingat dan daftar istilah penting beserta artinya).`;
+            } else if (params.docType === 'LKPD') {
+                specificStructure = `
+Susun **LEMBAR KERJA PESERTA DIDIK (LKPD) INTERAKTIF BERBASIS CINTA & DEEP LEARNING** yang siap dicetak dan dibagikan kepada murid:
+1. **KOP & IDENTITAS LKPD** (Tabel berisi Mata Pelajaran, Kelas/Fase, Topik, Nama Kelompok/Siswa, Anggota, Hari/Tanggal).
+2. **TUJUAN BELAJAR & NILAI CINTA YANG DIKEMBANGKAN** (Bahasa ramah siswa yang menyemangati, menyoroti fokus ${params.pancaCinta.join(', ')}).
+3. **PETUNJUK PENGERJAAN & KESELAMATAN / ETIKA KOLABORASI** (Ajakan bekerja sama dengan saling menghargai pendapat teman).
+4. **STIMULUS KONTEKSTUAL (AYO AMATI & RENUNGKAN!)** (Dalam <div class="deep-box">, sajikan teks pemantik/kasus nyata/skenario masalah yang memicu kesadaran/mindful dan rasa ingin tahu siswa).
+5. **AKTIVITAS EKSPLORASI & KOLABORASI BERTAHAP**:
+   - **Aktivitas 1: Memahami Konsep (Eksplorasi Awal)** — Pertanyaan/tugas penemuan terbimbing beserta ruang/tabel jawaban.
+   - **Aktivitas 2: Mengaplikasi & Berkreasi (Pemecahan Masalah / Proyek Mini)** — Tugas kolaboratif nyata sesuai sintaks ${params.model}.
+   - **Aktivitas 3: Aksi Nyata Penuh Cinta** — Tantangan penerapan nilai cinta di lingkungan sekolah atau rumah.
+6. **KOTAK REFLEKSI PERASAAN & PEMAHAMAN MURID** (Dalam <div class="cinta-box">, pertanyaan refleksi: Apa hal baru yang kupahami? Bagaimana perasaanku saat belajar bersama teman? Kebaikan apa yang akan kulakukan?).
+7. **RUBRIK PENILAIAN DIRI & TEMAN SEJAWAT** (Tabel ceklis sederhana untuk siswa).`;
+            } else {
+                specificStructure = `
+Susun **PERANGKAT PENILAIAN & ASESMEN KOMPREHENSIF (KURIKULUM MERDEKA & PANCA CINTA)** dengan struktur:
+1. **IDENTITAS ASESMEN & KRITERIA KETERCAPAIAN TUJUAN PEMBELAJARAN (KKTP)** (Tabel identitas dan rubrik KKTP dengan 4 interval: Perlu Bimbingan, Cukup, Baik, Sangat Baik).
+2. **ASESMEN DIAGNOSTIK (AWAL PEMBELAJARAN)** (3 pertanyaan/aktivitas singkat untuk memetakan kesiapan belajar dan kondisi emosional murid).
+3. **KISI-KISI SOAL SUMATIF** (Tabel lengkap: No, Tujuan Pembelajaran, Materi, Indikator Soal, Level Kognitif [L1/L2/L3 HOTS], Bentuk Soal, Nomor Soal).
+4. **INSTRUMEN SOAL ASESMEN SUMATIF**:
+   - **Bagian A: 5 Soal Pilihan Ganda Berbasis Stimulus Kontekstual & HOTS** (Lengkap dengan stimulus kasus/data singkat, opsi A-D/A-E sesuai jenjang ${params.level}, dan muatan nilai karakter/cinta).
+   - **Bagian B: 3 Soal Uraian Pemecahan Masalah & Refleksi Nilai** (Menuntut penalaran mendalam dan aplikasi kehidupan nyata).
+5. **KUNCI JAWABAN, PEMBAHASAN & PEDOMAN PENSKORAN** (Kunci jawaban jelas, penjelasan konsepnya, dan rumus perhitungan nilai akhir).
+6. **RUBRIK PENILAIAN SIKAP PANCA CINTA & KETERAMPILAN KOLABORASI** (Dalam <div class="cinta-box">, tabel observasi sikap yang mengukur ${params.pancaCinta.join(', ')} beserta indikator perilaku yang teramati).`;
+            }
+
+            const userPrompt = `Buatkan ${params.docType} lengkap dengan rincian berikut:
+- Jenjang Pendidikan: ${params.level}
+- Fase & Kelas: ${params.fase}
+- Mata Pelajaran: ${params.subject}
+- Topik / Materi Pokok: ${params.topic}
+- Alokasi Waktu: ${params.duration}
+- Model Pembelajaran: ${params.model}
+- Fokus Kurikulum Berbasis Cinta (Panca Cinta): ${params.pancaCinta.join(', ')}
+- Elemen Pembelajaran Mendalam (Deep Learning): ${params.deepLearning.join(', ')}
+- Nama Guru & Sekolah: ${params.teacherName} (${params.schoolName})
+- Konteks Lokal / Catatan Tambahan: ${params.notes || 'Sesuaikan dengan karakteristik peserta didik Indonesia secara inklusif dan kontekstual.'}
+
+${specificStructure}
+
+Pastikan bahasa sangat natural, pedagogis, mendalam, menyentuh hati, dan langsung dapat dipraktikkan guru di ruang kelas. Langsung tulis kode HTML kontennya tanpa pembuka/penutup percakapan.`;
+
+            return {
+                contents: [{ parts: [{ text: userPrompt }] }],
+                systemInstruction: { parts: [{ text: systemInstruction }] }
+            };
+        }
+
+        function renderGeneratedHTML(rawHtml) {
+            // Bersihkan jika AI membungkus dengan ```html ... ```
+            let cleanHtml = rawHtml.replace(/^```html\s*/i, '').replace(/```\s*$/i, '').trim();
+
+            document.getElementById('doc-empty-state').classList.add('hidden');
+            document.getElementById('doc-loading-state').classList.add('hidden');
+            document.getElementById('printable-area').classList.remove('hidden');
+
+            const docContainer = document.getElementById('doc-content');
+            docContainer.innerHTML = cleanHtml;
+            docContainer.setAttribute('contenteditable', 'false');
+            isEditingDoc = false;
+            document.getElementById('edit-btn-text').textContent = 'Edit Langsung';
+            document.getElementById('edit-mode-banner').classList.add('hidden');
+
+            // Aktifkan tombol toolbar
+            ['btn-toggle-edit', 'btn-save-doc', 'btn-copy-doc', 'btn-export-word', 'btn-print-pdf'].forEach(id => {
+                document.getElementById(id).disabled = false;
+            });
+        }
+
+        document.getElementById('generator-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const docType = document.getElementById('gen-doc-type').value;
+            const level = document.getElementById('gen-level').value;
+            const fase = document.getElementById('gen-fase').value;
+            const subject = document.getElementById('gen-subject').value.trim();
+            const duration = document.getElementById('gen-duration').value.trim();
+            const topic = document.getElementById('gen-topic').value.trim();
+            const model = document.getElementById('gen-model').value;
+            const notes = document.getElementById('gen-notes').value.trim();
+
+            const pancaCinta = Array.from(document.querySelectorAll('input[name="panca-cinta"]:checked')).map(cb => cb.value);
+            if (pancaCinta.length === 0) {
+                pancaCinta.push('Cinta Ilmu', 'Cinta Diri dan Sesama Manusia');
+            }
+
+            const deepLearning = Array.from(document.querySelectorAll('input[name="deep-learning"]:checked')).map(cb => cb.value);
+            if (deepLearning.length === 0) {
+                deepLearning.push('Berkesadaran (Mindful)', 'Bermakna (Meaningful)', 'Menggembirakan (Joyful)');
+            }
+
+            const params = {
+                docType,
+                level,
+                fase,
+                subject,
+                duration,
+                topic,
+                model,
+                pancaCinta,
+                deepLearning,
+                notes,
+                teacherName: currentUser ? currentUser.name : 'Pendidik Bermakna',
+                schoolName: currentUser ? currentUser.school : 'Satuan Pendidikan'
+            };
+
+            // Tampilkan state loading
+            const btnGenerate = document.getElementById('btn-generate');
+            btnGenerate.disabled = true;
+            btnGenerate.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i><span>Sedang Menyusun...</span>`;
+
+            document.getElementById('doc-empty-state').classList.add('hidden');
+            document.getElementById('printable-area').classList.add('hidden');
+            document.getElementById('doc-loading-state').classList.remove('hidden');
+
+            try {
+                const payload = buildPedagogicalPrompt(params);
+                const generatedHtml = await callGeminiWithRetry(payload);
+
+                currentDocMeta = {
+                    id: 'doc_' + Date.now(),
+                    docType,
+                    level,
+                    fase,
+                    subject,
+                    topic,
+                    duration,
+                    model,
+                    pancaCinta,
+                    deepLearning,
+                    createdAt: Date.now()
+                };
+
+                renderGeneratedHTML(generatedHtml);
+                // Otomatis simpan ke arsip pengguna agar tidak hilang
+                await saveCurrentDocument();
+            } catch (error) {
+                console.error('Error generating document:', error);
+                document.getElementById('doc-loading-state').classList.add('hidden');
+                document.getElementById('doc-empty-state').classList.remove('hidden');
+                showToast('Terjadi kendala koneksi saat menyusun dokumen. Silakan coba lagi.', 'error');
+            } finally {
+                btnGenerate.disabled = false;
+                btnGenerate.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles"></i><span>Susun Perangkat Ajar Sekarang</span>`;
+            }
+        });
+
+        // =====================================================================
+        // FITUR EDITOR LANGSUNG, SALIN, CETAK PDF, & UNDUH WORD (.DOC)
+        // =====================================================================
+        window.toggleDocumentEdit = function() {
+            const docContainer = document.getElementById('doc-content');
+            const banner = document.getElementById('edit-mode-banner');
+            const btnText = document.getElementById('edit-btn-text');
+
+            isEditingDoc = !isEditingDoc;
+            docContainer.setAttribute('contenteditable', isEditingDoc ? 'true' : 'false');
+
+            if (isEditingDoc) {
+                banner.classList.remove('hidden');
+                btnText.textContent = 'Selesai Edit';
+                docContainer.focus();
+                showToast('Mode edit aktif. Anda dapat menyunting teks atau tabel secara langsung.', 'info');
+            } else {
+                banner.classList.add('hidden');
+                btnText.textContent = 'Edit Langsung';
+                showToast('Perubahan teks diterapkan. Klik "Simpan ke Arsip" untuk menyimpan.', 'success');
+            }
+        };
+
+        window.copyDocumentText = function() {
+            const docContainer = document.getElementById('doc-content');
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = docContainer.innerText;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            try {
+                document.execCommand('copy');
+                showToast('Seluruh teks dokumen berhasil disalin ke clipboard!', 'success');
+            } catch (err) {
+                showToast('Gagal menyalin teks.', 'error');
+            }
+            document.body.removeChild(tempTextArea);
+        };
+
+        window.exportToWord = function() {
+            if (!currentDocMeta) return;
+            const contentHtml = document.getElementById('doc-content').innerHTML;
+
+            // Template HTML khusus agar Microsoft Word merender tabel, heading, dan kotak dengan rapi
+            const wordDocumentHtml = `
+                <html xmlns:o='urn:schemas-microsoft-com:office:office'
+                      xmlns:w='urn:schemas-microsoft-com:office:word'
+                      xmlns='http://www.w3.org/TR/REC-html40'>
+                <head>
+                    <meta charset='utf-8'>
+                    <title>${currentDocMeta.docType} - ${currentDocMeta.topic}</title>
+                    <style>
+                        body { font-family: 'Calibri', 'Arial', sans-serif; font-size: 11pt; line-height: 1.5; color: #1e293b; }
+                        h1 { font-size: 16pt; color: #881337; text-align: center; border-bottom: 2px solid #be123c; padding-bottom: 6pt; text-transform: uppercase; }
+                        h2 { font-size: 13pt; color: #9f1239; background-color: #fff1f2; padding: 4pt 8pt; border-left: 4pt solid #e11d48; margin-top: 14pt; }
+                        h3 { font-size: 11.5pt; color: #0f766e; margin-top: 10pt; }
+                        table { width: 100%; border-collapse: collapse; margin: 10pt 0; font-size: 10.5pt; }
+                        th, td { border: 1px solid #94a3b8; padding: 5pt 7pt; text-align: left; vertical-align: top; }
+                        th { background-color: #f1f5f9; font-weight: bold; }
+                        .cinta-box { background-color: #fff1f2; border: 1px solid #fecdd3; padding: 8pt; margin: 8pt 0; }
+                        .deep-box { background-color: #f0fdfa; border: 1px solid #ccfbf1; padding: 8pt; margin: 8pt 0; }
+                    </style>
+                </head>
+                <body>
+                    ${contentHtml}
+                </body>
+                </html>
+            `;
+
+            const blob = new Blob(['\ufeff', wordDocumentHtml], {
+                type: 'application/msword'
+            });
+
+            const safeTopic = (currentDocMeta.topic || 'Perangkat_Ajar').replace(/[^a-zA-Z0-9]/g, '_');
+            const safeType = (currentDocMeta.docType || 'Dokumen').replace(/[^a-zA-Z0-9]/g, '_');
+            const filename = `${safeType}_${safeTopic}_PendidikBermakna.doc`;
+
+            const url = URL.createObjectURL(blob);
+            const downloadLink = document.createElement('a');
+            downloadLink.href = url;
+            downloadLink.download = filename;
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+            URL.revokeObjectURL(url);
+
+            showToast(`Mengunduh file Word: ${filename}`, 'success');
+        };
+
+        // =====================================================================
+        // INISIALISASI SAAT HALAMAN DIMUAT
+        // =====================================================================
+        window.addEventListener('DOMContentLoaded', async () => {
+            updateFaseOptions();
+            await initFirebaseSafely();
+
+            // Cek apakah ada sesi login yang tersimpan
+            const savedSession = localStorage.getItem(APP_STORAGE_SESSION);
+            if (savedSession) {
+                try {
+                    const userObj = JSON.parse(savedSession);
+                    if (userObj && userObj.email) {
+                        setActiveUser(userObj);
+                    }
+                } catch (e) {
+                    localStorage.removeItem(APP_STORAGE_SESSION);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
